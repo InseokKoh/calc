@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>세모 견적 프로그램</title>
+
+</head>
+
+<body>
+
+
+
+   <script laguage="javascript">
+        function cal(cal) {
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                document.getElementById("calc3").value= xhr.responseText;
+            };
+            //xhr.open('POST', 'https://semoserver.herokuapp.com/cal', true);
+            xhr.open('POST', 'https://semoserver.herokuapp.com/cal', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            var data = 'calc1='+document.getElementById("calc1").value+'&calc2='+document.getElementById("calc2").value+'&usd='+document.getElementById("usd").value+'&cal='+cal;
+            xhr.send(data);
+        }
+        
+        function addComma(num) {
+          var regexp = /\B(?=(\d{3})+(?!\d))/g;
+          return num.toString().replace(regexp, ',');
+        }
+
+      
+
+      function reset(){
+
+         document.getElementById("calc1").value = "";
+
+         document.getElementById("calc2").value = "";
+
+         document.getElementById("calc3").value = "";
+
+      }
+
+   </script>
+
+   <h1>세모 인터네셔널 견적 프로그램</h1>
+
+   <h2>아래 항목을 채워주세요.</h2>
+
+   <br>
+
+    
+
+
+<td>적용환율</td>
+
+<td><input type="text" id="usd"></td>
+
+
+<td>차량금액</td>
+
+<td><input type="text" id="calc1"></td>
+
+
+<td>차량 위치 </td>
+<select name="location", id="calc2">
+<option value="">차량 위치 선택</option>
+<option value="e">동부</option>
+<option value="m">중부</option>
+<option value="w">서부</option>
+</select>
+
+    
+
+
+<td><b>결과값</b></td>
+<td><input type="text" id="calc3"></td>
+
+
+
+   <button id="button1" onclick="cal('plus')">FTA 적용(차대번호 시작이 1,4,5)</button>
+
+   <button id="button2" onclick="cal('minus')">FTA 미적용(차대번호 시작이 1,4,5 가 아님)</button>
+
+   <button id="button5" onclick="reset()">취소</button>
+
+</body>
+
+</html>
